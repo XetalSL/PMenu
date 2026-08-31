@@ -156,6 +156,9 @@ list MenuPage(list options, integer page, integer topLevel) {
             llList2String([BACK_MENU," "],topLevel == TRUE),
             llList2String([NEXT_PAGE," "],pStop == maxEl)];
     }
+    else {
+        return options;
+    }
     
     return menuList + llList2List(subList,6,8) + llList2List(subList,3,5) + llList2List(subList,0,2);
 }
@@ -186,6 +189,10 @@ integer HandlePMenu(integer chnl, key user, string selection) {
         }
         else if(HasMenuGroup(selection)) {
             PushUserMenuStack(user, selection);
+            ShowPMenu(user);
+            return FALSE;
+        }
+        else if(selection == " ") {
             ShowPMenu(user);
             return FALSE;
         }
