@@ -144,6 +144,7 @@ ShowPMenu(key user) {
 
 list MenuPage(list options, integer page, integer topLevel) {
     integer pStart = page * PAGE_ELEMENTS;
+    if(pStart < 0) pStart = 0;
     integer pStop = pStart-1 + PAGE_ELEMENTS;
     integer maxEl = llGetListLength(options)-1;
     if(pStop > maxEl) pStop = maxEl;
@@ -212,5 +213,8 @@ ClearPMenuCache() {
     list keys = llLinksetDataFindKeys("^@ⱣⱮ_.*$",0,0);
     integer i;
     integer nk = llGetListLength(keys);
-    while (i++ < nk) llLinksetDataDeleteProtected((string)keys[i],lsdPassword);
+    while (i < nk) { 
+        llLinksetDataDeleteProtected((string)keys[i],lsdPassword);
+        i++;
+    }
 }
