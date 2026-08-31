@@ -1,9 +1,17 @@
 # PMenu
-A SecondLife LSL Library for making paginated and nested menus
+A SecondLife LSL library for making paginated and nested menus
+
+#Features:
+- Automatically adds customizable paginated navigation on large menu lists.
+- Multi-user contexts allows multiple individuals to navigate the menu system without conflicting with other users.
+- Auto purges handles/listeners from inactivity with configurable time. Automatically closes handles/listeners on selected option.#
+- Uses LinkSetData to manage menu structures and states. A LinkSetData Password can be configured.
+- Lightweight menu library.
 
 Example:
 
 ```
+#include "PMenu.lsl"
 
 default
 {
@@ -23,10 +31,10 @@ default
         ShowMenu(llDetectedKey(0));
     }
     
-    listen(integer chan, string name, key id, string msg)
+    listen(integer chan, string name, key user, string msg)
     {
         if(HandlePMenu(chan,id,msg)) {
-            llOwnerSay("Selected Option: " + msg);
+            llOwnerSay("User \"" + user + "\" Selected Option: " + msg);
         }
     }
     
