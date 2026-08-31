@@ -8,6 +8,17 @@ A SecondLife LSL library for making paginated and nested menus
 - Uses LinkSetData to manage menu structures and states. A LinkSetData Password can be configured.
 - Lightweight menu library.
 
+#Preprocessor options
+Define one or more of these options to customize PMenu
+
+| Directive  | Description | Default |
+| ---- | ---- | ---- |
+| NEXT_PAGE | The special identity of the next page button | "►" |
+| PREVIOUS_PAGE | The special identity of the previous page button | "◄" |
+| BACK_MENU | The special identity of the back a menu button | "Back" |
+| PMENU_PURGE_AGE_SECONDS | The age of a listener and its respective user entry before it is discarded | 30 |
+| PMENU_INSTANCE | If you are running multiple scripts in the same linked prim system, this allows you to have concurrently running menu systems without conflicting with states. | "DEF_INST" |
+
 Example:
 
 ```
