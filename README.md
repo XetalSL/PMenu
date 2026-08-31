@@ -1,14 +1,14 @@
 # PMenu
 A SecondLife LSL library for making paginated and nested menus
 
-#Features:
+## Features:
 - Automatically adds customizable paginated navigation on large menu lists.
 - Multi-user contexts allows multiple individuals to navigate the menu system without conflicting with other users.
 - Auto purges handles/listeners from inactivity with configurable time. Automatically closes handles/listeners on selected option.#
 - Uses LinkSetData to manage menu structures and states. A LinkSetData Password can be configured.
 - Lightweight menu library.
 
-#Preprocessor options
+## Preprocessor options
 Define one or more of these options to customize PMenu
 
 | Directive  | Description | Default |
@@ -19,10 +19,10 @@ Define one or more of these options to customize PMenu
 | PMENU_PURGE_AGE_SECONDS | The age of a listener and its respective user entry before it is discarded | 30 |
 | PMENU_INSTANCE | If you are running multiple scripts in the same linked prim system, this allows you to have concurrently running menu systems without conflicting with states. | "DEF_INST" |
 
-#Nested Menus
+## Nested Menus
 Simply specify the group name as a menu option and PMenu will do the rest.
 
-Example:
+# Example
 
 ```
 #include "PMenu.lsl"
