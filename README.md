@@ -19,6 +19,9 @@ Define one or more of these options to customize PMenu
 | PMENU_PURGE_AGE_SECONDS | The age of a listener and its respective user entry before it is discarded | 30 |
 | PMENU_INSTANCE | If you are running multiple scripts in the same linked prim system, this allows you to have concurrently running menu systems without conflicting with states. | "DEF_INST" |
 
+#Nested Menus
+Simply specify the group name as a menu option and PMenu will do the rest.
+
 Example:
 
 ```
