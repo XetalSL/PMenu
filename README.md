@@ -30,8 +30,12 @@ default
     {
         llLinksetDataReset();
         llSetTimerEvent(5);
+
+        //Resets the specific Instance of PMenu which is a safer call to make than llLinksetDataReset();
         //ClearPMenuCache();
+
         InitPMenu("password");
+
         SetMenuGroup("ROOT", "Top level menu", ["A","B","C","D"]);
         SetMenuGroup("A","second menu", ["1","2","3","4","5","6","7","8","9","10","11","12"]);
         SetMenuGroup("2","second menu", ["1A","2A","3A","4A","5A","6A","7A","8A","9A","10A","11A","12A"]);
