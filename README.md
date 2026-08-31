@@ -43,7 +43,7 @@ default
 
     touch_start(integer total_number)
     {
-        ShowMenu(llDetectedKey(0));
+        ShowPMenu(llDetectedKey(0));
     }
     
     listen(integer chan, string name, key user, string msg)
