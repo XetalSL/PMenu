@@ -170,22 +170,22 @@ integer HandlePMenu(integer chnl, key user, string selection) {
         //llOwnerSay((string)chnl + " _ " + (string)user + " _ " + selection);
         if(selection == NEXT_PAGE) {
             IncMenuPage(user);
-            ShowMenu(user);
+            ShowPMenu(user);
             return FALSE;
         }
         else if(selection == PREVIOUS_PAGE) {
             DecMenuPage(user);
-            ShowMenu(user);
+            ShowPMenu(user);
             return FALSE;
         }
         else if(selection == BACK_MENU) {
             PopUserMenuStack(user);
-            ShowMenu(user);
+            ShowPMenu(user);
             return FALSE;
         }
         else if(HasMenuGroup(selection)) {
             PushUserMenuStack(user, selection);
-            ShowMenu(user);
+            ShowPMenu(user);
             return FALSE;
         }
         SetUserActivity(user);
