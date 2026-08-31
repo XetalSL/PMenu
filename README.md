@@ -51,7 +51,7 @@ default
     
     listen(integer chan, string name, key user, string msg)
     {
-        if(HandlePMenu(chan,id,msg)) {
+        if(HandlePMenu(chan,user,msg)) {
             llOwnerSay("User \"" + user + "\" Selected Option: " + msg);
         }
     }
