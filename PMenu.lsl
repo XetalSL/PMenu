@@ -52,6 +52,10 @@ integer HasMenuGroup(string group) {
 }
 
 RegisterListener(key user) {
+    if(IsUserRegistered(user)) {
+        SetUserActivity(user);
+        return;
+    }
     integer chnl = ((integer)("0x"+llGetSubString((string)user,-8,-1)) & 0x3FFFFFFF) ^ 0xBFFFFFFF;
     integer handle = llListen(chnl, "", user, "");
     integer s = llLinksetDataWriteProtected(LSD_MENU_USER_CONTEXT+(string)user, (string)chnl + LSD_DELIMITER + (string)handle, lsdPassword);
@@ -60,13 +64,21 @@ RegisterListener(key user) {
         ResetMenuPage(user);
         SetUserActivity(user);
     }
+    else {
+        llListenRemove(handle);
+    }
 }
 
 DeregisterListener(key user) {
     list chHdl = llParseStringKeepNulls(llLinksetDataReadProtected(LSD_MENU_USER_CONTEXT+(string)user,lsdPassword),[LSD_DELIMITER],[]);
     llListenRemove((integer)chHdl[1]);
-    llLinksetDataDeleteProtected(LSD_MENU_USER_CONTEXT+(string)user, lsdPassword);
+    llLinksetDataDeleteProtected(LSD_MENU_USER_CONTEXT + (string)user, lsdPassword);
+    llLinksetDataDeleteProtected(LSD_MENU_USER_STACK + (string)user, lsdPassword);
     RemUserActivity(user);
+}
+
+integer IsUserRegistered(key user) {
+    return llLinksetDataReadProtected(LSD_MENU_USER_CONTEXT+(string)user, lsdPassword) != "";
 }
 
 integer GetListenerChannel(key user) {
@@ -123,7 +135,7 @@ integer GetUserActivity(key user) {
     return (integer)llLinksetDataReadProtected(LSD_MENU_USER_ACTIVITY + (string)user, lsdPassword);
 }
 
-ShowMenu(key user) {
+ShowPMenu(key user) {
     RegisterListener(user);
     string uMStk = PeekUserMenuStack(user);
     list choices = MenuPage(GetMenuGroup(uMStk), GetMenuPage(user), uMStk == "ROOT");
