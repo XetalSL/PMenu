@@ -75,7 +75,7 @@ Call this from your `listen` event, passing through the event's parameters. It:
 
 - Ignores messages that don't match the user's registered listen channel
 - Handles `NEXT_PAGE`, `PREVIOUS_PAGE`, and `BACK_MENU` events internally
-- Pushes into a submenu if `selection` matches a group registered for this user (shared or per-user override, via `HasUserMenuGroup`)
+- Pushes into a submenu if `selection` matches a group registered for this user (shared or per-user override)
 - Otherwise treats `selection` as a final leaf choice, deregisters the user's listener, and returns `TRUE` so your script can act on it
 
 Returns `FALSE` if the selection was consumed internally (pagination/navigation/blank button), or `TRUE` if it's a leaf selection your script should handle.
