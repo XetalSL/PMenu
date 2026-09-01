@@ -45,6 +45,7 @@ Registers (or updates) a **shared** menu group, visible to every user unless a u
 - `options` — the list of button labels for this group. Any entry that matches another registered group's name becomes a submenu link.
 
 A group cannot list itself in its own `options`. `SetMenuGroup` rejects this and logs an owner-say warning.
+
 You may specify and empty list `[]` if you want to show only a message.
 
 ```lsl
@@ -57,6 +58,7 @@ SetMenuGroup("Settings", "Settings", ["Volume", "Notifications", "Reset"]);
 Registers (or updates) a **per-user override** for a menu group. When the specified user views `group`, they'll see this header/options instead of the shared definition set by `SetMenuGroup`. Other users are unaffected. Useful for personalizing a menu — e.g. showing an "Undo Purchase" option only to the user who just bought something, or tailoring a settings menu to a user's current state or permission.
 
 Like `SetMenuGroup`, this rejects a group that references itself in its own `options`.
+
 Like `SetMenuGroup`, you may specify and empty list `[]` if you want to show only a message.
 
 ```lsl
