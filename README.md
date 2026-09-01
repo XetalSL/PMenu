@@ -4,12 +4,12 @@ A SecondLife LSL library for making paginated and nested menus
 ## Features:
 - Automatically adds customizable paginated navigation (Previous / Back / Next controls) on large menu lists.
 - Multi-user contexts allows multiple individuals to navigate the menu system without conflicting with other users.
-- Per-user menu overrides allow a group's options/header can be customized for a specific avatar, falling back to the shared definition when no override exists
+- Per-user menu overrides allow a group's options/header can be customized for a specific avatar, falling back to the shared definition when no override exists.
 - Auto purges handles/listeners from inactivity with configurable time. Automatically closes handles/listeners on selected option.
 - Uses LinkSetData to manage menu structures and states. A LinkSetData Password can be configured.
 - Lightweight menu library.
-- Named menu groups that can reference each other as submenus, with automatic Back-button navigation via a per-user stack
-- Supports Multiple independent instances on the same multi-prim object
+- Named menu groups that can reference each other as submenus, with automatic Back-button navigation.
+- Supports Multiple independent instances on the same multi-prim object.
 
 ## Preprocessor options
 Define one or more of these options to customize PMenu
