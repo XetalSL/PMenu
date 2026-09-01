@@ -38,7 +38,7 @@ Call once, typically in `state_entry`. You can optionally set the password used 
 
 ### `SetMenuGroup(string group, string header, list options)`
 
-Registers (or overwrites) a **shared** menu group, visible to every user unless a user specific override has been declared.
+Registers (or updates) a **shared** menu group, visible to every user unless a user specific override has been declared.
 
 - `group` — the group's identifier. Use `"ROOT"` for the top-level menu.
 - `header` — the text shown at the top of the `llDialog` for this group.
@@ -53,7 +53,7 @@ SetMenuGroup("Settings", "Settings", ["Volume", "Notifications", "Reset"]);
 
 ### `SetUserMenuGroup(key user, string group, string header, list options)`
 
-Registers (or overwrites) a **per-user override** for a menu group. When the specified user views `group`, they'll see this header/options instead of the shared definition set by `SetMenuGroup`. Other users are unaffected. Useful for personalizing a menu — e.g. showing an "Undo Purchase" option only to the user who just bought something, or tailoring a settings menu to a user's current state or permission.
+Registers (or updates) a **per-user override** for a menu group. When the specified user views `group`, they'll see this header/options instead of the shared definition set by `SetMenuGroup`. Other users are unaffected. Useful for personalizing a menu — e.g. showing an "Undo Purchase" option only to the user who just bought something, or tailoring a settings menu to a user's current state or permission.
 
 Like `SetMenuGroup`, this rejects a group that references itself in its own `options`.
 
