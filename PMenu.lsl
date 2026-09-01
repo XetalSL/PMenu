@@ -27,6 +27,7 @@ string lsdPassword;
 #define LSD_MENU_USER_ACTIVITY ("@ⱣⱮ_" + ##PMENU_INSTANCE + "_UA:")
 #define LSD_MENU_USER_STACK ("@ⱣⱮ_" + ##PMENU_INSTANCE + "_US:") 
 #define LSD_MENU_USER_PAGE ("@ⱣⱮ_" + ##PMENU_INSTANCE + "_UP:") 
+
 #define LSD_MENU_OPTION_GROUP ("@ⱣⱮ_" + ##PMENU_INSTANCE + "_OG:")
 #define LSD_MENU_OPTION_GROUP_HEADER ("@ⱣⱮ_" + ##PMENU_INSTANCE + "_OGH:")
 
@@ -39,12 +40,33 @@ SetMenuGroup(string group, string header, list options) {
     llLinksetDataWriteProtected(LSD_MENU_OPTION_GROUP_HEADER + group, header, lsdPassword);
 }
 
-list GetMenuGroup(string group) {
-    return llParseString2List(llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP + group,lsdPassword), [LSD_DELIMITER], []); 
+SetUserMenuGroup(key user, string group, string header, list options) {
+    if(~llListFindList(options, (list)group)) {
+        llOwnerSay("Cant add menu group: \"" + group + "\". The group refers to itself in its own options!"); 
+        return;
+    }
+    llLinksetDataWriteProtected(LSD_MENU_OPTION_GROUP + group + ":" + (string)user, llDumpList2String(options,LSD_DELIMITER), lsdPassword);
+    llLinksetDataWriteProtected(LSD_MENU_OPTION_GROUP_HEADER + group + ":" + (string)user, header, lsdPassword);
 }
 
-string GetMenuGroupHeader(string group) {
-    return llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP_HEADER + group, lsdPassword);
+list GetUserMenuGroup(string group, key user) {
+    string grp = llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP + group + ":" + (string)user,lsdPassword);
+    if(grp != "") {
+        return llParseString2List(grp, [LSD_DELIMITER], []); 
+    }
+    else {
+        return llParseString2List(llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP + group,lsdPassword), [LSD_DELIMITER], []);
+    }
+}
+
+string GetUserMenuGroupHeader(string group, key user) {
+    string hdr = llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP_HEADER + group + ":" + (string)user, lsdPassword);
+    if(hdr != "") {
+        return hdr;
+    }
+    else {
+        return llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP_HEADER + group, lsdPassword);
+    }
 }
 
 integer HasMenuGroup(string group) {
@@ -138,8 +160,8 @@ integer GetUserActivity(key user) {
 ShowPMenu(key user) {
     RegisterListener(user);
     string uMStk = PeekUserMenuStack(user);
-    list choices = MenuPage(GetMenuGroup(uMStk), GetMenuPage(user), uMStk == "ROOT");
-    llDialog(user, GetMenuGroupHeader(uMStk), choices, GetListenerChannel(user));
+    list choices = MenuPage(GetUserMenuGroup(uMStk,user), GetMenuPage(user), uMStk == "ROOT");
+    llDialog(user, GetUserMenuGroupHeader(uMStk,user), choices, GetListenerChannel(user));
 }
 
 list MenuPage(list options, integer page, integer topLevel) {
