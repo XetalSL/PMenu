@@ -69,8 +69,11 @@ string GetUserMenuGroupHeader(string group, key user) {
     }
 }
 
-integer HasMenuGroup(string group) {
-    return llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP + group,lsdPassword) != ""; 
+integer HasUserMenuGroup(string group, key user) {
+    if(llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP + group + ":" + (string)user, lsdPassword) != "") {
+        return TRUE;
+    }
+    return llLinksetDataReadProtected(LSD_MENU_OPTION_GROUP + group, lsdPassword) != "";
 }
 
 RegisterListener(key user) {
@@ -209,7 +212,7 @@ integer HandlePMenu(integer chnl, key user, string selection) {
             ShowPMenu(user);
             return FALSE;
         }
-        else if(HasMenuGroup(selection)) {
+        else if(HasUserMenuGroup(selection, user)) {
             PushUserMenuStack(user, selection);
             ShowPMenu(user);
             return FALSE;
